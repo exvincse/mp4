@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       <div class="progess" v-if="video.length">
+          <label for="file" class="upload" :class="{noclick:noclick}">
+              <input type="file" id="file" @change="upload()" ref="file" :disabled="noclick">
+              上傳音樂
+          </label>
+          <div class="layout" v-if="progress.progress">
+              <div>
+                  <span>{{progress.start}}MB</span>
+                  <span>{{progress.total}}MB</span>
+              </div>
+              <div class="progess-bar" :style="{width:progress.progress+'px'}"></div>
+          </div>
+       </div>
+        <div class="main">
+            <video v-if="video.length" class="video1" type="video/mp4" autoplay controls
+            @ended="end">
+                <source :src="music">
+            </video>
+            <div class="music-wrap">
+                <h2>歌單</h2>
+                <ul class="music-list">
+                    <li v-for="(item,index) in video" :key="index">
+                        <a href="#" :title="item.name" @click.prevent="togglemusic(item.fileUrl,index)"
+                            :class="{'active':id === index}">
+                            <i v-if="id === index" class="fas fa-chevron-right"></i>
+                            <i class="fas fa-music"></i>
+                            <span>{{item.name}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+  <script src="js/all.js"></script>
+</body>
+</html>
