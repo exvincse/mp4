@@ -34,7 +34,7 @@
                 <ul class="music-list">
                     <li v-for="(item,index) in video" :key="index">
                         <a href="#" :title="item.name" @click.prevent="togglemusic(item.fileUrl,index)"
-                            :class="{'active':id === index}">
+                            :class="{'actived':id === index}">
                             <i v-if="id === index" class="fas fa-chevron-right"></i>
                             <i class="fas fa-music"></i>
                             <span>{{item.name}}</span>
